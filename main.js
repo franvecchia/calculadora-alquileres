@@ -1,71 +1,40 @@
-let fechaInicio = document.getElementById("fechaInicio");
-let fechaFinalizacion = document.getElementById("fechaFinal");
-let boton = document.getElementById('boton');
-let monto = document.getElementById('monto');
-let valorFechaInicio;
-let valorFechaFinal;
-let valorMonto;
-let fechaInicial;
-
+let boton = document.getElementById('boton')
 
 boton.addEventListener('click', (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    valorFechaInicio = fechaInicio.value;
-    valorFechaFinal = fechaFinalizacion.value;
-    valorMonto = monto.value;
-    let fechaInicialEntero = fechaAEntero(valorFechaInicio);
-    let fechaFinalEntero = fechaAEntero(valorFechaFinal);
-    console.log("La fecha de inicio es: ", fechaInicialEntero);
-    console.log("La fecha de finalizacion es: ", fechaFinalEntero);
-    console.log(fechaInicial);
+    let fechaInicio = document.getElementById("fechaInicio").value
+    let fechaFinalizacion = document.getElementById("fechaFinal").value
+    let monto = document.getElementById('monto').value
+    calcularFechaInicial(fechaInicio)
 })
 
-function fechaAEntero(fecha) {
-    // Eliminar los guiones de la fecha
-    let fechaSinGuiones = fecha.replace(/-/g, "");
 
-    // Convertir la cadena resultante a un número entero
-    let fechaComoEntero = parseInt(fechaSinGuiones, 10);
+async function obtenerDatos () {
+    const apiUrl = "inflacion_mensual_oficial"
+    const proxyUrl = "https://bcra-proxy-cors.vercel.app"
 
-    return fechaComoEntero;
+    const peticion = await fetch(`${proxyUrl}/${apiUrl}`, {
+        headers: {
+            Authorization: "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDQ0MzMwNTgsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJmcmFudmVjY2hpYTAwQGdtYWlsLmNvbSJ9.LxijwX08kVJGZ5iJv6T8kS3kOO7q6z7r-16gB8TFTaIa8K7zVEcpUmrKRphC4JGq6YlhAZLzy3dldOfr5zT4vQ",
+        },
+    })
+    .then((response) => {return response.json()})
+    .then((data) => {return data})
+    .catch((err) => {return err})
+
+    return peticion
 }
 
-const apiUrl = "inflacion_mensual_oficial";
-const proxyUrl = "https://bcra-proxy-cors.vercel.app";
+async function calcularFechaInicial(fechaInicial) {
+    let arr = await obtenerDatos()
+    let fechaBuscada = arr.find((fechaAux) => fechaAAnioMes(fechaAux.d) === fechaAAnioMes(fechaInicial))
 
-fetch(`${proxyUrl}/${apiUrl}`, {
-    headers: {
-        Authorization: "BEARER eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDM1NDM3NDQsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJmcmFudmVjY2hpYTAwQGdtYWlsLmNvbSJ9.hYSveqvheMmxxyMzT5GVSzrCqFWl3AAutve1EE_yWyOG7kR4uVv4E9n0hiysMgg_eEdPXgXDi1-mP7Jib_pzYg",
-    },
-})
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data)
-        fechaInicial=buscarFechaInicial(data);
-
-        console.log(fechaInicial)
-    })
-
-function buscarFechaInicial(data) {
-    let i = 0;
-    let fechaBuscada = null;
-    let fechaInicioSinDia=fechaAAnioMes(valorFechaInicio);
-    while (i < data.length && fechaBuscada == null) {
-        let fecha = fechaAAnioMes(data[i])
-        if (fecha == fechaInicioSinDia) {
-            fechaBuscada = data[i];
-        } else {
-            i++;
-        }
-    }
+    console.log(fechaBuscada)
+    return fechaBuscada
 }
 
 function fechaAAnioMes(fecha) {
-    let anioYMes = fecha.substring(0, 7);
-    return anioYMes;
-}
-
-function realizarCalculos(f) {
-
+    let anioYMes = fecha.substring(0, 7)
+    return anioYMes
 }
