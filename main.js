@@ -3,7 +3,7 @@ let fechaActual = new Date().toISOString().split('T')[0];
 document.getElementById('fechaInicio').max = fechaActual;
 document.getElementById('fechaFinal').max = fechaActual
 
-boton.addEventListener('click', async (e) => {
+boton.addEventListener('click', (e) => {
     e.preventDefault()
 
     const fechaInicio = document.getElementById("fechaInicio").value

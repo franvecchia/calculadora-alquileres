@@ -112,6 +112,11 @@ input[type=number]::-webkit-outer-spin-button {
         margin-bottom: 10px;
         width: 80%;
         border: 2px solid #003256;
+        background-color: white;
+    }
+
+    .input:focus {
+        outline: none;
     }
     
     .boton {
