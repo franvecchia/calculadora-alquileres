@@ -1,13 +1,16 @@
 const boton = document.getElementById('boton')
+let fechaActual = new Date().toISOString().split('T')[0];
+document.getElementById('fechaInicio').max = fechaActual;
+document.getElementById('fechaFinal').max = fechaActual
 
-boton.addEventListener('click', (e) => {
+boton.addEventListener('click', async (e) => {
     e.preventDefault()
 
     const fechaInicio = document.getElementById("fechaInicio").value
     const fechaFinalizacion = document.getElementById("fechaFinal").value
     const monto = document.getElementById('monto').value
 
-    if (fechaInicio != "" && fechaFinalizacion != "" && monto != "" && fechaInicio<fechaFinalizacion) {
+    if (fechaInicio != "" && fechaFinalizacion != "" && monto != "" && fechaInicio<fechaFinalizacion && monto>0) {
         calcularDatos(fechaInicio, fechaFinalizacion, monto)
     } else {
         Swal.fire({
@@ -29,9 +32,7 @@ async function obtenerDatos () {
         },
     })
     .then((response) => {return response.json()})
-    .then((data) => {
-        console.log(data)
-        return data})
+    .then((data) => {return data})
     .catch((err) => {return err})
 
     return peticion
@@ -71,7 +72,8 @@ async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
         }
     }
 
-    console.log(montoAcum)
+    let contenidoResultado=document.getElementById('resultado')
+    contenidoResultado.innerHTML=`<p class="resultado">Monto Actualizado: ${montoAcum.toFixed(2)}</p>`
 }
 
 function fechaAAnioMes(fecha) {

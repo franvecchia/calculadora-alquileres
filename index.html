@@ -9,43 +9,42 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./styles.css" />
-    <title>Document</title>
+    <link rel="icon" href="./img/main-img.jpg" />
+    <title>Calculadora de Alquileres - M. Vecchia Propiedades</title>
   </head>
 
   <body>
     <div class="container">
-      <div class="row">
+      <div class="row d-flex text-center justify-content-center">
+        <img src="./img/main-img.jpg" alt="logo m vecchia" class="img">
         <h1 class="titulo">Calculadora de alquileres</h1>
-        <h3>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda,
-          fuga voluptatum. Excepturi libero rerum nulla quo, illum nam repellat
-          provident, laboriosam perferendis harum aliquid minus quae quos quasi,
-          aut ut.
+        <h3 class="subtitulo">
+          Calculá tu actualización de alquiler por IPC
         </h3>
-        <p>
-          Nota: los datos mensuales de inflacion son sacados de la pagina oficial del banco central;
-          si usted selecciona una fecha de finalizacion en la que todavia no se
-          conoce el IPC, se tomará hasta la fecha del ultimo IPC conocido publicamente
+        <p class="text">
+          Nota: los datos mensuales de inflación son sacados de la pagina oficial del banco central;
+          si usted selecciona una fecha de finalización en la que todavia no se
+          conoce el IPC, se tomará hasta la fecha del ultimo IPC conocido públicamente.
         </p>
         <div class="d-flex text-center justify-content-center">
-          <form action="">
-            <label for="">Fecha de Inicio</label>
-            <br />
-            <input type="date" id="fechaInicio" />
-            <br />
-            <label for="">Fecha de Finalizacion</label>
-            <br />
-            <input type="date" id="fechaFinal" />
-            <br />
-            <label for="" class="monto">Monto a Actualizar</label>
-            <br />
-            <input type="number" id="monto" />
-            <br />
-            <button type="submit" class="" id="boton">Calcular</button>
+          <form action="" class="form">
+            <div>
+            <label for="fechaInicio" class="label">Fecha de Inicio</label>
+            <input type="date" name="fechaInicio" class="input" id="fechaInicio" max=""/>
+            </div>
+            <div>
+            <label for="fechaFinal" class="label">Fecha de Finalizacion</label>
+            <input type="date"  name="fechaFinal" class="input" id="fechaFinal" max=""/>
+            </div>
+            <div>
+            <label for="monto" class="label">Monto a Actualizar</label>
+            <input type="number" name="monto" class="input" id="monto" placeholder="Ej: 100000"/>
+            </div>
+            <button type="submit" class="boton" id="boton">Calcular</button>
           </form>
         </div>
+        <div id="resultado"></div>
       </div>
     </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
