@@ -37,7 +37,6 @@
     padding: 5px;
     margin-top: 4px;
     margin-bottom: 10px;
-    width: 80%;
     border: 2px solid #003256;
 }
 
@@ -55,7 +54,6 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 6px;
     padding: 4px;
     margin: 10px;
-    width: 80%;
     background-color: #003256;
     border: 0px;
     height: 15%;
@@ -111,7 +109,6 @@ input[type=number]::-webkit-outer-spin-button {
         padding: 5px;
         margin-top: 4px;
         margin-bottom: 10px;
-        width: 80%;
         border: 2px solid #003256;
         background-color: white;
     }
@@ -124,7 +121,6 @@ input[type=number]::-webkit-outer-spin-button {
         border-radius: 6px;
         padding: 4px;
         margin: 10px;
-        width: 80%;
         background-color: #003256;
         border: 0px;
         height: 15%;
