@@ -73,10 +73,16 @@ function fechaAAnioMes(fecha) {
 }
 
 async function bloquearCalendario() {
-    let arrAux=await obtenerDatos()
-    let fechaActual=arrAux[arrAux.length-1].d
-    document.getElementById('fechaInicio').max = fechaActual
-    document.getElementById('fechaFinal').max = fechaActual
+    try {
+        let arrAux = await obtenerDatos();
+        if (arrAux && arrAux.length>0) {
+            let fechaFormatoCorrecto = new Date(arrAux[arrAux.length-1].d).toISOString().split('T')[0];
+            document.getElementById('fechaInicio').max = fechaFormatoCorrecto;
+            document.getElementById('fechaFinal').max = fechaFormatoCorrecto;
+        }
+    } catch (error) {
+        console.error('Error al bloquear las fechas:', error);
+    }
 }
 
-bloquearCalendario()
+bloquearCalendario();
