@@ -110,11 +110,13 @@ appearance: textfield;
     .input {
         border-radius: 4px;
         width: 250px !important;
+        height: 40px;
         padding: 5px;
         margin-top: 4px;
         margin-bottom: 10px;
         border: 2px solid #003256;
         background-color: white;
+        color: black;
     }
 
     .input:focus {
@@ -127,7 +129,7 @@ appearance: textfield;
         margin: 10px;
         background-color: #003256;
         border: 0px;
-        height: 15%;
+        height: 40px;
         font-size: 18px;
         width: 250px;
         font-weight: bold;
