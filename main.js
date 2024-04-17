@@ -1,7 +1,4 @@
 const boton = document.getElementById('boton')
-let fechaActual = new Date().toISOString().split('T')[0]
-document.getElementById('fechaInicio').max = fechaActual
-document.getElementById('fechaFinal').max = fechaActual
 
 boton.addEventListener('click', (e) => {
     e.preventDefault()
@@ -49,12 +46,6 @@ async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
         if (fechaAAnioMes(arr[i].d) === fechaAAnioMes(fechaInicial)) {
             fechaBuscada=arr[i]
             let FechaFinal= arr.find((fechaAux) => fechaAAnioMes(fechaAux.d) === fechaAAnioMes(fechaFinalizacion))
-            if (FechaFinal == null) {
-                i--
-                fechaBuscada=arr[i]
-                let size=arr.length
-                FechaFinal=arr[size-1]
-            }
 
             while (fechaAAnioMes(fechaBuscada.d) != fechaAAnioMes(FechaFinal.d)) {
                 inflacion=parseFloat(fechaBuscada.v)
@@ -80,3 +71,12 @@ function fechaAAnioMes(fecha) {
     let anioYMes = fecha.substring(0, 7)
     return anioYMes
 }
+
+async function bloquearCalendario() {
+    let arrAux=await obtenerDatos()
+    let fechaActual=arrAux[arrAux.length-1].d
+    document.getElementById('fechaInicio').max = fechaActual
+    document.getElementById('fechaFinal').max = fechaActual
+}
+
+bloquearCalendario()
