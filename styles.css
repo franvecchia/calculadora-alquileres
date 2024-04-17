@@ -93,6 +93,7 @@ input[type=number]::-webkit-outer-spin-button {
     
     .text {
         font-size: 11px;
+        width: 80%;
         color: white;
         border: 1px solid grey;
         border-radius: 6px;
