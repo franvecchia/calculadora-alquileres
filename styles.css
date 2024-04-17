@@ -118,11 +118,6 @@ appearance: textfield;
         background-color: white;
         color: black;
     }
-
-    input[type=date] {
-        color: black;
-    }
-
     .input:focus {
         outline: none;
     }
