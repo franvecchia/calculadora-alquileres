@@ -1,6 +1,6 @@
 const boton = document.getElementById('boton')
-let fechaActual = new Date().toISOString().split('T')[0];
-document.getElementById('fechaInicio').max = fechaActual;
+let fechaActual = new Date().toISOString().split('T')[0]
+document.getElementById('fechaInicio').max = fechaActual
 document.getElementById('fechaFinal').max = fechaActual
 
 boton.addEventListener('click', (e) => {

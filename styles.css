@@ -50,7 +50,8 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 input[type=number] { -moz-appearance:textfield; 
-appearance: textfield;}
+appearance: textfield;
+}
 
 .boton {
     border-radius: 6px;
@@ -108,7 +109,7 @@ appearance: textfield;}
     
     .input {
         border-radius: 4px;
-        width: 75% importn !important;
+        width: 250px !important;
         padding: 5px;
         margin-top: 4px;
         margin-bottom: 10px;
@@ -128,6 +129,7 @@ appearance: textfield;}
         border: 0px;
         height: 15%;
         font-size: 18px;
+        width: 250px;
         font-weight: bold;
         color: white;
     }
