@@ -8,7 +8,7 @@ boton.addEventListener('click', (e) => {
     const monto = document.getElementById('monto').value
 
     if (fechaInicio != "" && fechaFinalizacion != "" && monto != "" && fechaInicio<fechaFinalizacion && monto>0) {
-        calcularDatos(fechaInicio, fechaFinalizacion, monto)
+        calcularDatos(fechaAlReves(fechaInicio), fechaAlReves(fechaFinalizacion), monto)
     } else {
         Swal.fire({
             title: "Ingrese los datos correctamente.",
@@ -29,7 +29,8 @@ async function obtenerDatos () {
         },
     })
     .then((response) => {return response.json()})
-    .then((data) => {return data})
+    .then((data) => {console.log(data)
+        return data})
     .catch((err) => {return err})
 
     return peticion
@@ -72,17 +73,27 @@ function fechaAAnioMes(fecha) {
     return anioYMes
 }
 
-async function bloquearCalendario() {
-    try {
-        let arrAux = await obtenerDatos();
-        if (arrAux && arrAux.length>0) {
-            let fechaFormatoCorrecto = new Date(arrAux[arrAux.length-1].d).toISOString().split('T')[0];
-            document.getElementById('fechaInicio').max = fechaFormatoCorrecto;
-            document.getElementById('fechaFinal').max = fechaFormatoCorrecto;
-        }
-    } catch (error) {
-        console.error('Error al bloquear las fechas:', error);
-    }
+function fechaAlReves(fecha) {
+    const partes = fecha.split('-')
+    const nuevaFecha = `${partes[2]}-${partes[1]}-${partes[0]}`
+  
+    return nuevaFecha
 }
 
-bloquearCalendario();
+$(async function() {
+    let arrAux = await obtenerDatos()
+    let fechaMaxConvertida = fechaAlReves(arrAux[arrAux.length-1].d)
+    let fechaMinConvertida = fechaAlReves(arrAux[0].d)
+
+    $( "#fechaInicio" ).datepicker({ 
+        dateFormat: "dd-mm-yy", 
+        maxDate: fechaMaxConvertida,
+        minDate: fechaMinConvertida
+    })
+
+    $( "#fechaFinal" ).datepicker({ 
+        dateFormat: "dd-mm-yy", 
+        maxDate: fechaMaxConvertida,
+        minDate: fechaMinConvertida
+    })
+})
