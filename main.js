@@ -29,18 +29,28 @@ async function obtenerDatos () {
         },
     })
     .then((response) => {return response.json()})
-    .then((data) => {console.log(data)
-        return data})
+    .then((data) => {return data})
     .catch((err) => {return err})
 
     return peticion
 }
 
+async function arrayNuevo () {
+    let arrViejo=await obtenerDatos()
+    let arrNuevo=[
+        {d: "2024-03-31", v: 11.0}
+    ]
+
+    let arrResultado=arrViejo.concat(arrNuevo);
+    return arrResultado;
+}
+
 async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
-    let arr = await obtenerDatos()
+    let arr = await arrayNuevo()
     let i=0
     let fechaBuscada=null
     let inflacion=0
+    let acumInflacion=0
     let montoAcum=monto
     
     while (i<arr.length && fechaBuscada==null) {
@@ -48,13 +58,18 @@ async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
             fechaBuscada=arr[i]
             let FechaFinal= arr.find((fechaAux) => fechaAAnioMes(fechaAux.d) === fechaAAnioMes(fechaFinalizacion))
 
+            console.log(fechaBuscada)
+            console.log(FechaFinal)
+
             while (fechaAAnioMes(fechaBuscada.d) != fechaAAnioMes(FechaFinal.d)) {
+                acumInflacion+=parseFloat(fechaBuscada.v)
                 inflacion=parseFloat(fechaBuscada.v)
                 montoAcum*=(1+(inflacion/100))
                 i++
                 fechaBuscada=arr[i]
             }
             
+            acumInflacion+=parseFloat(fechaBuscada.v)
             inflacion=parseFloat(fechaBuscada.v)
             montoAcum*=(1+(inflacion/100))
             i++
@@ -65,7 +80,8 @@ async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
     }
 
     let contenidoResultado=document.getElementById('resultado')
-    contenidoResultado.innerHTML=`<p class="resultado">Monto Actualizado: ${montoAcum.toFixed(2)}</p>`
+    contenidoResultado.innerHTML=`<p class="resultado">Monto Actualizado: ${montoAcum.toFixed(2)}</p>
+    <p class="resultado-numero">(+${acumInflacion}%)</p>`
 }
 
 function fechaAAnioMes(fecha) {
@@ -81,7 +97,7 @@ function fechaAlReves(fecha) {
 }
 
 $(async function() {
-    let arrAux = await obtenerDatos()
+    let arrAux = await arrayNuevo()
     let fechaMaxConvertida = fechaAlReves(arrAux[arrAux.length-1].d)
     let fechaMinConvertida = fechaAlReves(arrAux[0].d)
 
