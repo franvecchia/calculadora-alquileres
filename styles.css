@@ -17,14 +17,25 @@
     font-size: 24px;
 }
 
-.text {
-    font-size: 14px;
-    width: 50%;
-    color: white;
-    border: 1px solid grey;
+.bg-nota {
+    border: 1px solid darkgray;
     border-radius: 6px;
-    background-color: darkgray;
-    padding: 5px;
+    background-color: grey;
+    width: auto;
+}
+
+.text {
+    font-size: 16px;
+    color: white;
+    padding-top: 3px;
+}
+
+.text2 {
+    text-align: end;
+    padding: 0px;
+    margin: 0px;
+    color: white;
+    font-size: 14px;
 }
 
 .label {   
@@ -100,14 +111,25 @@ appearance: textfield;
         font-size: 18px;
     }
     
-    .text {
-        font-size: 11px;
-        width: 80%;
-        color: white;
-        border: 1px solid grey;
+    .bg-nota {
+        border: 1px solid darkgray;
         border-radius: 6px;
-        background-color: darkgray;
-        padding: 5px;
+        background-color: grey;
+        width: 75%;
+    }
+    
+    .text {
+        font-size: 12px;
+        color: white;
+        padding-top: 3px;
+    }
+    
+    .text2 {
+        text-align: end;
+        padding: 0px;
+        margin: 0px;
+        color: white;
+        font-size: 11px;
     }
     
     .label {   

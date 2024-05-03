@@ -50,7 +50,7 @@ async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
     let i=0
     let fechaBuscada=null
     let inflacion=0
-    let acumInflacion=0
+    let acumInflacion=1
     let montoAcum=monto
     
     while (i<arr.length && fechaBuscada==null) {
@@ -58,30 +58,25 @@ async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
             fechaBuscada=arr[i]
             let FechaFinal= arr.find((fechaAux) => fechaAAnioMes(fechaAux.d) === fechaAAnioMes(fechaFinalizacion))
 
-            console.log(fechaBuscada)
-            console.log(FechaFinal)
-
             while (fechaAAnioMes(fechaBuscada.d) != fechaAAnioMes(FechaFinal.d)) {
-                acumInflacion+=parseFloat(fechaBuscada.v)
                 inflacion=parseFloat(fechaBuscada.v)
+                acumInflacion*=(1+(inflacion/100))
                 montoAcum*=(1+(inflacion/100))
                 i++
                 fechaBuscada=arr[i]
             }
-            
-            acumInflacion+=parseFloat(fechaBuscada.v)
             inflacion=parseFloat(fechaBuscada.v)
+            acumInflacion*=(1+(inflacion/100))
             montoAcum*=(1+(inflacion/100))
-            i++
-            fechaBuscada=arr[i]
         } else {
             i++
         }
     }
-
+    
+    acumInflacion=(acumInflacion-1)*100;
     let contenidoResultado=document.getElementById('resultado')
     contenidoResultado.innerHTML=`<p class="resultado">Monto Actualizado: ${montoAcum.toFixed(2)}</p>
-    <p class="resultado-numero">(+${acumInflacion}%)</p>`
+    <p class="resultado-numero">(+${acumInflacion.toFixed(1)}%)</p>`
 }
 
 function fechaAAnioMes(fecha) {
