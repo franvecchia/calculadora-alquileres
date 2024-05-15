@@ -38,7 +38,8 @@ async function obtenerDatos () {
 async function arrayNuevo () {
     let arrViejo=await obtenerDatos()
     let arrNuevo=[
-        {d: "2024-03-31", v: 11.0}
+        {d: "2024-03-31", v: 11.0},
+        {d: "2024-04-30", v: 8.8}
     ]
 
     let arrResultado=arrViejo.concat(arrNuevo);
@@ -97,13 +98,19 @@ $(async function() {
     let fechaMinConvertida = fechaAlReves(arrAux[0].d)
 
     $( "#fechaInicio" ).datepicker({ 
-        dateFormat: "dd-mm-yy", 
+        dateFormat: "dd-mm-yy",
+        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+        monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
+        "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
         maxDate: fechaMaxConvertida,
         minDate: fechaMinConvertida
     })
 
     $( "#fechaFinal" ).datepicker({ 
-        dateFormat: "dd-mm-yy", 
+        dateFormat: "dd-mm-yy",
+        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+        monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
+        "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
         maxDate: fechaMaxConvertida,
         minDate: fechaMinConvertida
     })
