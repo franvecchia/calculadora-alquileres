@@ -29,7 +29,8 @@ async function obtenerDatos () {
         },
     })
     .then((response) => {return response.json()})
-    .then((data) => {return data})
+    .then((data) => {console.log(data)
+        return data})
     .catch((err) => {return err})
 
     return peticion
@@ -39,11 +40,12 @@ async function arrayNuevo () {
     let arrViejo=await obtenerDatos()
     let arrNuevo=[
         {d: "2024-03-31", v: 11.0},
-        {d: "2024-04-30", v: 8.8}
+        {d: "2024-04-30", v: 8.8},
+        {d:"2024-05-31", v: 4.2}
     ]
 
-    let arrResultado=arrViejo.concat(arrNuevo);
-    return arrResultado;
+    let arrResultado=arrViejo.concat(arrNuevo)
+    return arrResultado
 }
 
 async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
@@ -74,7 +76,7 @@ async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
         }
     }
     
-    acumInflacion=(acumInflacion-1)*100;
+    acumInflacion=(acumInflacion-1)*100
     let contenidoResultado=document.getElementById('resultado')
     contenidoResultado.innerHTML=`<p class="resultado">Monto Actualizado: ${montoAcum.toFixed(2)}</p>
     <p class="resultado-numero">(+${acumInflacion.toFixed(1)}%)</p>`
@@ -99,18 +101,18 @@ $(async function() {
 
     $( "#fechaInicio" ).datepicker({ 
         dateFormat: "dd-mm-yy",
-        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-        monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
-        "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+        dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+        monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
+        "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         maxDate: fechaMaxConvertida,
         minDate: fechaMinConvertida
     })
 
     $( "#fechaFinal" ).datepicker({ 
         dateFormat: "dd-mm-yy",
-        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-        monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
-        "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+        dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+        monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
+        "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         maxDate: fechaMaxConvertida,
         minDate: fechaMinConvertida
     })
