@@ -1,4 +1,7 @@
-metodos pendientes:
-RealizarCalculo -> deberia recibir la inflacion total de los meses de diferencia y el monto
-calcular inflacion -> deberia recibir el mes inicial (ya buscado) y el mes final e ir recorriendo el array de la api inversamente hasta llegar a la fecha inicial sumando en una variable
-los porcentajes de inflacion de cada mes.
+Esta calculadora te permite calcular tu actualización de contrato de alquiler automáticamente simplemente indicando los datos de fecha inicio de contrato de alquier, fecha de finalizacion de alquiler, y monto a actualizar. Ejemplo:
+
+Fecha Inicio: 1/1/2024
+Fecha Finalización: 30/4/2024
+Monto A Actualizar: 100.000
+
+Te calculará así el nuevo contrato que deberas pagar utilizando los índices de inflación de esos meses publicados oficialmente por el Indec.
