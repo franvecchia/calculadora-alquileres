@@ -29,7 +29,7 @@ async function obtenerDatos () {
         },
     })
     .then((response) => {return response.json()})
-    .then((data) => {console.log(data)
+    .then((data) => {
         return data})
     .catch((err) => {return err})
 
@@ -42,7 +42,8 @@ async function arrayNuevo () {
         {d: "2024-03-31", v: 11.0},
         {d: "2024-04-30", v: 8.8},
         {d:"2024-05-31", v: 4.2},
-        {d: "2024-06-30", v: 4.6}
+        {d: "2024-06-30", v: 4.6},
+        {d: "2024-07-31", v: 4.0}
     ]
 
     let arrResultado=arrViejo.concat(arrNuevo)
