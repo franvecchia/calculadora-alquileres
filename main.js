@@ -44,7 +44,8 @@ async function arrayNuevo () {
         {d:"2024-05-31", v: 4.2},
         {d: "2024-06-30", v: 4.6},
         {d: "2024-07-31", v: 4.0},
-        {d: "2024-08-31", v: 4.2}
+        {d: "2024-08-31", v: 4.2},
+        {d:"2024-09-30", v: 3.5}
     ]
 
     let arrResultado=arrViejo.concat(arrNuevo)
