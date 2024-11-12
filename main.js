@@ -29,8 +29,7 @@ async function obtenerDatos () {
         },
     })
     .then((response) => {return response.json()})
-    .then((data) => {
-        return data})
+    .then((data) => {return data})
     .catch((err) => {return err})
 
     return peticion
@@ -45,7 +44,8 @@ async function arrayNuevo () {
         {d: "2024-06-30", v: 4.6},
         {d: "2024-07-31", v: 4.0},
         {d: "2024-08-31", v: 4.2},
-        {d:"2024-09-30", v: 3.5}
+        {d:"2024-09-30", v: 3.5},
+        {d: "2024-10-31", v: 2.7}
     ]
 
     let arrResultado=arrViejo.concat(arrNuevo)
@@ -54,33 +54,28 @@ async function arrayNuevo () {
 
 async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
     let arr = await arrayNuevo()
-    let i=0
-    let fechaBuscada=null
     let inflacion=0
     let acumInflacion=1
     let montoAcum=monto
-    
-    while (i<arr.length && fechaBuscada==null) {
-        if (fechaAAnioMes(arr[i].d) === fechaAAnioMes(fechaInicial)) {
-            fechaBuscada=arr[i]
-            let FechaFinal= arr.find((fechaAux) => fechaAAnioMes(fechaAux.d) === fechaAAnioMes(fechaFinalizacion))
+   
+    arr.forEach(element => {
+        element.d = fechaAAnioMes(element.d)
+    })
 
-            while (fechaAAnioMes(fechaBuscada.d) != fechaAAnioMes(FechaFinal.d)) {
-                inflacion=parseFloat(fechaBuscada.v)
-                acumInflacion*=(1+(inflacion/100))
-                montoAcum*=(1+(inflacion/100))
-                i++
-                fechaBuscada=arr[i]
-            }
-            inflacion=parseFloat(fechaBuscada.v)
-            acumInflacion*=(1+(inflacion/100))
-            montoAcum*=(1+(inflacion/100))
-        } else {
-            i++
-        }
+    let indexFechaInicial = arr.findIndex(element => element.d === fechaAAnioMes(fechaInicial))
+    let indexFechaFinal = arr.findIndex(element => element.d === fechaAAnioMes(fechaFinalizacion))
+
+    for (let i=indexFechaInicial;i<indexFechaFinal;i++) {
+        inflacion=parseFloat(arr[i].v)
+        acumInflacion*=(1+(inflacion/100))
+        montoAcum*=(1+(inflacion/100))
     }
-    
+
     acumInflacion=(acumInflacion-1)*100
+    mostrarResultado(montoAcum, acumInflacion)
+}
+
+function mostrarResultado (montoAcum, acumInflacion) {
     let contenidoResultado=document.getElementById('resultado')
     contenidoResultado.innerHTML=`<p class="resultado">Monto Actualizado: ${montoAcum.toFixed(2)}</p>
     <p class="resultado-numero">(+${acumInflacion.toFixed(1)}%)</p>`
@@ -98,7 +93,7 @@ function fechaAlReves(fecha) {
     return nuevaFecha
 }
 
-$(async function() {
+$(async () => {
     let arrAux = await arrayNuevo()
     let fechaMaxConvertida = fechaAlReves(arrAux[arrAux.length-1].d)
     let fechaMinConvertida = fechaAlReves(arrAux[0].d)
