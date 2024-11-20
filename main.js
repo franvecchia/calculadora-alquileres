@@ -1,3 +1,5 @@
+import { array } from "./data.js"
+
 const boton = document.getElementById('boton')
 
 boton.addEventListener('click', (e) => {
@@ -37,18 +39,10 @@ async function obtenerDatos () {
 
 async function arrayNuevo () {
     let arrViejo=await obtenerDatos()
-    let arrNuevo=[
-        {d: "2024-03-31", v: 11.0},
-        {d: "2024-04-30", v: 8.8},
-        {d:"2024-05-31", v: 4.2},
-        {d: "2024-06-30", v: 4.6},
-        {d: "2024-07-31", v: 4.0},
-        {d: "2024-08-31", v: 4.2},
-        {d:"2024-09-30", v: 3.5},
-        {d: "2024-10-31", v: 2.7}
-    ]
+    let arrNuevo=array
 
     let arrResultado=arrViejo.concat(arrNuevo)
+    console.log(arrResultado)
     return arrResultado
 }
 
