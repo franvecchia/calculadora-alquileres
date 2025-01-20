@@ -22,8 +22,7 @@ async function obtenerDatos() {
     const url = "https://api.bcra.gob.ar/estadisticas/v3.0/Monetarias/27"
     const peticion = await fetch(url)
     .then((response) => {return response.json()})
-    .then((data) => {console.log(data.results)
-        return data.results})
+    .then((data) => {return data.results})
     .catch((err) => {return err})
 
     return peticion
