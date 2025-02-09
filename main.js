@@ -3,8 +3,8 @@ const boton = document.getElementById('boton')
 boton.addEventListener('click', (e) => {
     e.preventDefault()
 
-    const fechaInicio = document.getElementById("fechaInicio").value
-    const fechaFinalizacion = document.getElementById("fechaFinal").value
+    const fechaInicio = document.getElementById('fechaInicio').value
+    const fechaFinalizacion = document.getElementById('fechaFinal').value
     const monto = document.getElementById('monto').value
 
     if (fechaInicio != "" && fechaFinalizacion != "" && monto != "" && fechaInicio<fechaFinalizacion && monto>0) {
@@ -14,7 +14,7 @@ boton.addEventListener('click', (e) => {
             title: "Ingrese los datos correctamente.",
             icon: "error",
             confirmButtonColor: '#003256'
-          })
+        })
     }
 })
 
@@ -29,20 +29,18 @@ async function obtenerDatos() {
 }
 
 async function calcularDatos(fechaInicial, fechaFinalizacion, monto) {
-    let arr = await obtenerDatos()
+    let arrayFechas = await obtenerDatos()
     let inflacion=0
     let acumInflacion=1
     let montoAcum=monto
    
-    arr.forEach(element => {
-        element.fecha = fechaAAnioMes(element.fecha)
-    })
+    arrayFechas.forEach(element => {element.fecha = fechaAAnioMes(element.fecha)})
 
-    let indexFechaInicial = arr.findIndex(element => element.fecha === fechaAAnioMes(fechaInicial))
-    let indexFechaFinal = arr.findIndex(element => element.fecha === fechaAAnioMes(fechaFinalizacion))
+    let indexFechaInicial = arrayFechas.findIndex(element => element.fecha === fechaAAnioMes(fechaInicial))
+    let indexFechaFinal = arrayFechas.findIndex(element => element.fecha === fechaAAnioMes(fechaFinalizacion))
 
     for (let i=indexFechaInicial;i>=indexFechaFinal;i--) {
-        inflacion=parseFloat(arr[i].valor)
+        inflacion=parseFloat(arrayFechas[i].valor)
         acumInflacion*=(1+(inflacion/100))
         montoAcum*=(1+(inflacion/100))
     }
@@ -58,22 +56,18 @@ function mostrarResultado (montoAcum, acumInflacion) {
 }
 
 function fechaAAnioMes(fecha) {
-    let anioYMes = fecha.substring(0, 7)
-    return anioYMes
-}
+    return fecha.substring(0, 7)
+} 
 
 function fechaAlReves(fecha) {
     const partes = fecha.split('-')
-    const nuevaFecha = `${partes[2]}-${partes[1]}-${partes[0]}`
-  
-    return nuevaFecha
+    return `${partes[2]}-${partes[1]}-${partes[0]}`
 }
 
 $(async () => {
-    let arrAux = await obtenerDatos()
-    let fechaMaxConvertida = fechaAlReves(arrAux[0].fecha)
-    let fechaMinConvertida = fechaAlReves(arrAux[arrAux.length-1].fecha)
-
+    let arrayFechas = await obtenerDatos()
+    let fechaMinConvertida = fechaAlReves(arrayFechas[arrayFechas.length-1].fecha)
+    let fechaMaxConvertida = fechaAlReves(arrayFechas[0].fecha)
 
     $( "#fechaInicio" ).datepicker({ 
         dateFormat: "dd-mm-yy",
